@@ -5,8 +5,9 @@ public class Memo {
     private String userName;
     private int userPassword;
     private String memoContent;
-    private Date date;
+    private Date modifiedDate;
     private static int count = 1;
+    private final Date createdDate;
 // static : 모든 memo 객체에서 instance들은 다 다른 값을 가지고 있다.
     // static으로 하면 공유 메모리에 올라감(모든 객체들이 공유함)
     //ex: 누가 만든 메모이던 count값은 똑같이 가진다.
@@ -15,7 +16,8 @@ public class Memo {
         this.userName = userName;
         this.userPassword = userPassword;
         this.memoContent = memoContent;
-        this.date = new Date();
+        this.modifiedDate = new Date();
+        this.createdDate = new Date();
     }
     public int getMemoNum(){
         return memoNum;
@@ -32,11 +34,10 @@ public class Memo {
         return memoContent;
     }
     //입력받음
-    public Date getDate() {
-        return date;
+    public Date getModifiedDate() {
+        return modifiedDate;
     }
-    public void setDate(Date date) {
-        this.date = date;
-        //수정 담당하는 사람이 set할때마다 바꿀 수 있도록~
+    public Date getCreatedDate() {
+        return createdDate;
     }
 }
