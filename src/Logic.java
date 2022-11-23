@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Logic {
-    MemoList memoList = new MemoList();
+    MemoDB memoDB = new MemoDB();
     Scanner scanner = new Scanner(System.in);
 
     public void scanIsNum(){
@@ -37,7 +37,7 @@ public class Logic {
         Memo memo = new Memo(createdUserName, createdUserPassword, createdMemoContent);
         //인스턴스 생성
 
-        memoList.insertMemo(memo);
+        memoDB.insertMemo(memo);
         //메모리스트에 인서트 하는 부분(만들어진 매서드 사용해서)
         System.out.println("System: 정상적으로 메모가 저장되었습니다.");
         scanner.nextLine();
@@ -45,7 +45,7 @@ public class Logic {
 
     public void showMemoList() {
         //Ctrl + Alt + v 리턴 타입을 모를 때 사용하면 좋다
-        ArrayList<Memo> allMemo = memoList.getAllMemo();
+        ArrayList<Memo> allMemo = memoDB.getAllMemo();
         for (Memo memo : allMemo) {
             System.out.println("==========");
             System.out.println("==========");
@@ -68,7 +68,7 @@ public class Logic {
         System.out.print("수정을 원하는 메모 번호를 입력해주세요 : ");
         scanIsNum();
         int modifyMemoNum = scanner.nextInt();
-        while (memoList.getMemoNum(modifyMemoNum) == null) {
+        while (memoDB.getMemoNum(modifyMemoNum) == null) {
             System.err.print("메모 번호에 맞는 메모가 존재하지 않습니다. \n수정을 원하는 메모 번호를 입력해주세요: ");
             scanIsNum();
             modifyMemoNum = scanner.nextInt();
@@ -77,7 +77,7 @@ public class Logic {
         scanIsNum();
         int modifyMemoPassword = scanner.nextInt();
 
-        while (memoList.getMemoNum(modifyMemoNum).getUserPassword() != modifyMemoPassword) {
+        while (memoDB.getMemoNum(modifyMemoNum).getUserPassword() != modifyMemoPassword) {
             System.err.print("비밀번호가 일치하지 않습니다. \n다시 입력해주세요 : ");
             scanIsNum();
             modifyMemoPassword = scanner.nextInt();
@@ -87,13 +87,13 @@ public class Logic {
         System.out.print("수정된 내용을 입력해주세요 : ");
         String modifyMemoContent = scanner.nextLine();
 
-        memoList.getMemoNum(modifyMemoNum).setMemoContent(modifyMemoContent);
-        memoList.getMemoNum(modifyMemoNum).setModifiedDate();
+        memoDB.getMemoNum(modifyMemoNum).setMemoContent(modifyMemoContent);
+        memoDB.getMemoNum(modifyMemoNum).setModifiedDate();
         System.out.println("System: 메모가 정상적으로 수정되었습니다.");
     }
 
     public void deleteMemo() {
-        if (memoList.getAllMemo().isEmpty()){
+        if (memoDB.getAllMemo().isEmpty()){
             System.err.println("삭제할 메모가 없습니다.");
             return;
         }
@@ -102,7 +102,7 @@ public class Logic {
 
         scanIsNum();
         int deleteNum = scanner.nextInt();
-        while (memoList.getMemoNum(deleteNum) == null) {
+        while (memoDB.getMemoNum(deleteNum) == null) {
             System.err.print("메모 번호에 맞는 메모가 존재하지 않습니다. \n삭제를 원하는 메모 번호를 입력해주세요: ");
             scanIsNum();
             deleteNum = scanner.nextInt();
@@ -110,13 +110,13 @@ public class Logic {
         System.out.print("메모 비밀번호를 입력해주세요: ");
         scanIsNum();
         int deletePassword = scanner.nextInt();
-        while (memoList.getMemoNum(deleteNum).getUserPassword() != deletePassword) {
+        while (memoDB.getMemoNum(deleteNum).getUserPassword() != deletePassword) {
             System.err.print("비밀번호가 일치하지 않습니다. \n다시 입력해주세요 : ");
             scanIsNum();
             deletePassword = scanner.nextInt();
         }
         scanner.nextLine();
-        memoList.deleteMemo(deleteNum);
+        memoDB.deleteMemo(deleteNum);
         System.out.println("System: 메모가 삭제되었습니다.");
     }
 }

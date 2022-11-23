@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class MemoList {
+public class MemoDB {
     private ArrayList<Memo> memoList = new ArrayList<>();
     public void insertMemo(Memo memo){
 
