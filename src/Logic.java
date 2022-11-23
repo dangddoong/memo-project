@@ -7,11 +7,26 @@ public class Logic {
     public void insertMemo() {
         System.out.println("==========");
         System.out.print("사용자 명을 입력해주세요 : ");
-        String s1 = scanner.nextLine();
+        String createdUserName = scanner.nextLine();
+        //createdUserName 에 scanner로 입력받은 값을 할당한다.
+
         System.out.print("메모 내용을 입력해주세요 : ");
-        String s2 = scanner.nextLine();
+        String createdMemoContent = scanner.nextLine();
+
         System.out.print("비밀번호를 입력해주세요(숫자 네자리) : ");
-        String s3 = scanner.nextLine();
+        int createdUserPassword = scanner.nextInt();
+
+        while ((int)(Math.log10(createdUserPassword)+1) != 4) {
+            System.out.print("비밀번호를 다시 입력해주세요(숫자 네자리) : ");
+            createdUserPassword = scanner.nextInt();
+        }
+        // Math.log10(인자)+1 <- (숫자의 자리수를 판별해줌) 을 사용해서 4가 아니면 빠져나오지 않는다.
+
+        Memo memo = new Memo(createdUserName,createdUserPassword,createdMemoContent);
+        //인스턴스 생성
+
+        memoList.insertMemo(memo);
+        //메모리스트에 인서트 하는 부분(만들어진 매서드 사용해서)
         System.out.println("System: 정상적으로 메모가 저장되었습니다.");
     }
 
