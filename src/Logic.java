@@ -25,6 +25,7 @@ public class Logic {
             System.err.print("비밀번호를 다시 입력해주세요(숫자 네자리) : ");
             createdUserPassword = scanner.nextInt();
         }
+        scanner.nextLine();
         // Math.log10(인자)+1 <- (숫자의 자리수를 판별해줌) 을 사용해서 4가 아니면 빠져나오지 않는다.
 
         Memo memo = new Memo(createdUserName, createdUserPassword, createdMemoContent);
@@ -56,18 +57,28 @@ public class Logic {
     }
 
     public void modifyMemo() {
-
-
         System.out.println("==========");
         System.out.print("수정을 원하는 메모 번호를 입력해주세요 : ");
-        String s1 = scanner.nextLine();
-        System.out.print("메모 번호에 맞는 메모가 존재하지 않습니다. ");
+        int modifyMemoNum = scanner.nextInt();
+        while (memoList.getMemoNum(modifyMemoNum) == null) {
+            System.err.print("메모 번호에 맞는 메모가 존재하지 않습니다. \n수정을 원하는 메모 번호를 입력해주세요: ");
+            modifyMemoNum = scanner.nextInt();
+        }
         System.out.print("메모 비밀 번호를 입력해주세요 : ");
-        String s2 = scanner.nextLine();
-        System.err.print("비밀번호가 일치하지 않습니다.");
+        int modifyMemoPassword = scanner.nextInt();
+        while (memoList.getMemoNum(modifyMemoNum).getUserPassword() != modifyMemoPassword) {
+            System.err.print("비밀번호가 일치하지 않습니다. \n다시 입력해주세요 : ");
+            modifyMemoPassword = scanner.nextInt();
+        }
+        scanner.nextLine();
+        System.out.println("비밀번호가 일치합니다.");
         System.out.print("수정된 내용을 입력해주세요 : ");
-        String s3 = scanner.nextLine();
-        System.out.println("메모이 정상적으로 수정되었습니다.");
+
+        String modifyMemoContent = scanner.nextLine();
+
+        memoList.getMemoNum(modifyMemoNum).setMemoContent(modifyMemoContent);
+        memoList.getMemoNum(modifyMemoNum).setModifiedDate();
+        System.out.println("메모가 정상적으로 수정되었습니다.");
     }
 
     public void deleteMemo() {

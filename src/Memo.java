@@ -40,4 +40,12 @@ public class Memo {
     public Date getCreatedDate() {
         return createdDate;
     }
+
+    public void setModifiedDate() {
+        this.modifiedDate = new Date();
+    }
+
+    public void setMemoContent(String memoContent) {
+        this.memoContent = memoContent;
+    }
 }
