@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class MemoList {
     private ArrayList<Memo> memoList = new ArrayList<>();
     public void insertMemo(Memo memo){
+
         memoList.add(memo);
     }
 
     public ArrayList<Memo> getAllMemo(){
+
         return memoList;
     }
 
