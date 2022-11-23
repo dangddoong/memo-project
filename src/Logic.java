@@ -10,7 +10,7 @@ public class Logic {
             scanner.next();
             System.err.print("에러! 숫자가 아닙니다. \n다시 입력해주세요 : ");
         }
-        scanner.nextLine();
+//        scanner.nextLine();
     }
 
     public void insertMemo() {
@@ -28,6 +28,7 @@ public class Logic {
         while ((int) (Math.log10(createdUserPassword) + 1) != 4) {
             System.err.print ("4자리 숫자가 아닙니다. \n비밀번호를 다시 입력해주세요 : ");
             scanIsNum();
+            scanner.nextLine();
             createdUserPassword = scanner.nextInt();
         }
         //nextInt는 enter 값을 반환하지 않기 때문에 버퍼에 남아있어 빼주어야 한다.
@@ -40,6 +41,7 @@ public class Logic {
         memoList.insertMemo(memo);
         //메모리스트에 인서트 하는 부분(만들어진 매서드 사용해서)
         System.out.println("System: 정상적으로 메모가 저장되었습니다.");
+        scanner.nextLine();
     }
 
     public void showMemoList() {
@@ -109,6 +111,7 @@ public class Logic {
             deleteNum = scanner.nextInt();
         }
         System.out.print("메모 비밀번호를 입력해주세요: ");
+        scanIsNum();
         int deletePassword = scanner.nextInt();
         while (memoList.getMemoNum(deleteNum).getUserPassword() != deletePassword) {
             System.err.print("비밀번호가 일치하지 않습니다. \n다시 입력해주세요 : ");
@@ -116,6 +119,7 @@ public class Logic {
             deletePassword = scanner.nextInt();
         }
         memoList.deleteMemo(deleteNum);
+        scanner.nextLine();
         System.out.println("System: 메모가 삭제되었습니다.");
     }
 }
