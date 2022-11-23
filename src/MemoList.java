@@ -5,6 +5,7 @@ public class MemoList {
     public void insertMemo(Memo memo){
         memoList.add(memo);
     }
+
     public ArrayList<Memo> getAllMemo(){
         return memoList;
     }
@@ -26,5 +27,6 @@ public class MemoList {
         }
         throw new IllegalArgumentException("삭제할 번호가 없습니다.");
     }
+
 
 }
