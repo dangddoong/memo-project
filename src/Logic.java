@@ -82,6 +82,10 @@ public class Logic {
     }
 
     public void deleteMemo() {
+        if (memoList.getAllMemo().isEmpty()){
+            System.err.println("삭제할 메모가 없습니다.");
+            return;
+        }
         System.out.println("==========");
         System.out.print("삭제를 원하는 메모 번호를 입력해주세요: ");
 
