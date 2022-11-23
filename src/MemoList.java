@@ -12,19 +12,21 @@ public class MemoList {
         return memoList;
     }
 
-    public Memo getMemo(int memoNum){
+    public Memo getMemoNum(int memoNum){
         for (Memo memo : memoList) {
             if (memo.getMemoNum() == memoNum) {
                 return memo;
             }
         }
-        throw new IllegalArgumentException("검색할 번호가 없습니다.");
+        return null;
+//        throw new IllegalArgumentException("검색할 번호가 없습니다.");
     }
 
     public void deleteMemo(int memoNum){
         for (Memo memo : memoList) {
             if (memo.getMemoNum() == memoNum) {
                 memoList.remove(memo);
+                return;
             }
         }
         throw new IllegalArgumentException("삭제할 번호가 없습니다.");

@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Logic {
     MemoList memoList = new MemoList();
     Scanner scanner = new Scanner(System.in);
+
     public void insertMemo() {
         System.out.println("==========");
         System.out.print("사용자 명을 입력해주세요 : ");
@@ -16,13 +17,13 @@ public class Logic {
         System.out.print("비밀번호를 입력해주세요(숫자 네자리) : ");
         int createdUserPassword = scanner.nextInt();
 
-        while ((int)(Math.log10(createdUserPassword)+1) != 4) {
+        while ((int) (Math.log10(createdUserPassword) + 1) != 4) {
             System.out.print("비밀번호를 다시 입력해주세요(숫자 네자리) : ");
             createdUserPassword = scanner.nextInt();
         }
         // Math.log10(인자)+1 <- (숫자의 자리수를 판별해줌) 을 사용해서 4가 아니면 빠져나오지 않는다.
 
-        Memo memo = new Memo(createdUserName,createdUserPassword,createdMemoContent);
+        Memo memo = new Memo(createdUserName, createdUserPassword, createdMemoContent);
         //인스턴스 생성
 
         memoList.insertMemo(memo);
@@ -45,7 +46,7 @@ public class Logic {
         }
         System.out.print("뒤로 가기를 원하시면 0을 입력해주세요: ");
         String s1 = scanner.nextLine();
-        if(!s1.equals("0")) {
+        if (!s1.equals("0")) {
             showMemoList();
         }
     }
@@ -68,11 +69,22 @@ public class Logic {
     public void deleteMemo() {
         System.out.println("==========");
         System.out.print("삭제를 원하는 메모 번호를 입력해주세요: ");
-        String s1 = scanner.nextLine();
-        System.out.println("메모 번호에 맞는 메모이 존재하지 않습니다.");
+
+        int deleteNum = scanner.nextInt();
+        while (memoList.getMemoNum(deleteNum) == null) {
+            System.out.println("메모 번호에 맞는 메모가 존재하지 않습니다.");
+            System.out.print("삭제를 원하는 메모 번호를 입력해주세요: ");
+            deleteNum = scanner.nextInt();
+        }
+
         System.out.print("메모 비밀번호를 입력해주세요: ");
-        String s2 = scanner.nextLine();
+        int deletePassword = scanner.nextInt();
+        while (memoList.getMemoNum(deleteNum).getUserPassword() != deletePassword) {
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            System.out.println("다시 입력해주세요.");
+            deletePassword = scanner.nextInt();
+        }
+        memoList.deleteMemo(deleteNum);
         System.out.println("메모가 삭제되었습니다.");
-        System.out.println("비밀번호가 일치하지 않습니다.");
     }
 }
